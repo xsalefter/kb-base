@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.xsalefter.kb.base</groupId>
     <artifactId>kb-base</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>kb-base</name>
 
@@ -20,5 +20,21 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <scm>
+        <connection>scm:git:git://github.com/xsalefter/kb-base.git</connection>
+        <developerConnection>scm:git:git@github.com:xsalefter/kb-base.git</developerConnection>
+        <tag>HEAD</tag>
+        <url>http://github.com/xsalefter/kb-base/tree/master</url>
+    </scm>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.xsalefter.kb.commons</groupId>
+                <artifactId>kb-commons</artifactId>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
