@@ -1,0 +1,54 @@
+name: release
+on:
+  workflow_dispatch:
+    inputs:
+      send_repository_dispatch:
+        description: "Send repository_dispatch to oss-client?"
+        required: true
+        default: 'yes'
+
+jobs:
+  release:
+    name: release kb-base
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup git user
+        env:
+          BUILD_USER: ${{ secrets.BUILD_USER }}
+          BUILD_TOKEN: ${{ secrets.BUILD_TOKEN }}
+        run: |
+          git config --global user.email "xsalefter@xsalefter.id"
+          git config --global user.name "xsalefter"
+          git config --global url."https://${BUILD_USER}:${BUILD_TOKEN}@github.com/".insteadOf "git@github.com:"
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: temurin
+      - name: Setup Maven Setting XML
+        uses: s4u/maven-settings-action@v2.8.0
+        with:
+          servers: '[{"id": "cloudsmith", "username": "${{ secrets.CLOUDSMITH_USER }}", "password": "${{ secrets.CLOUDSMITH_API_KEY }}"}]'
+      - name: Build Project
+        run: mvn --errors --batch-mode --show-version clean install
+      - name: Deploy artifacts
+        run: mvn release:clean release:prepare release:perform
+      - name: Send Repository Dispatch Event
+        if: success() && github.event.inputs.send_repository_dispatch == 'yes'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_SECRET }}
+          OWNER: xsalefter
+          REPO: kb-oss-parent
+        # using double quote in request body because we need to parse variable from string
+        run: |
+          VERSION_WITH_SNAPSHOT=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          PROJECT_VERSION=${VERSION_WITH_SNAPSHOT%-SNAPSHOT*}
+          curl -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}"\
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/${OWNER}/${REPO}/dispatches \
+            -d "{\"event_type\":\"update_base_version\", \"client_payload\": {\"property_name\": \"kb-base.version\", \"property_value\": \"$PROJECT_VERSION\"}}"
