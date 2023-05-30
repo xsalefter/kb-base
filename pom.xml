@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.xsalefter.kb.base</groupId>
     <artifactId>kb-base</artifactId>
-    <version>3.0.1-SNAPSHOT</version>
+    <version>3.0.1-RC1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>kb-base</name>
 
