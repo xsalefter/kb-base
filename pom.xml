@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.xsalefter.kb</groupId>
@@ -11,7 +9,7 @@
     </parent>
     <groupId>com.xsalefter.kb.base</groupId>
     <artifactId>kb-base</artifactId>
-    <version>3.0.1-RC1-SNAPSHOT</version>
+    <version>3.0.1-RC1</version>
     <packaging>jar</packaging>
     <name>kb-base</name>
 
@@ -24,7 +22,7 @@
     <scm>
         <connection>scm:git:git://github.com/xsalefter/kb-base.git</connection>
         <developerConnection>scm:git:git@github.com:xsalefter/kb-base.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>kb-base-3.0.1-RC1</tag>
         <url>http://github.com/xsalefter/kb-base/tree/master</url>
     </scm>
 
