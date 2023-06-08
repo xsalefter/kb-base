@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.xsalefter.kb.base</groupId>
     <artifactId>kb-base</artifactId>
-    <version>3.0.3-SNAPSHOT</version>
+    <version>3.0.3</version>
     <packaging>jar</packaging>
     <name>kb-base</name>
 
@@ -22,7 +22,7 @@
     <scm>
         <connection>scm:git:git://github.com/xsalefter/kb-base.git</connection>
         <developerConnection>scm:git:git@github.com:xsalefter/kb-base.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>kb-base-3.0.3</tag>
         <url>http://github.com/xsalefter/kb-base/tree/master</url>
     </scm>
 
